@@ -25,7 +25,7 @@ body {
     width: 460px;
     background: #1A171C;
     border-radius: 0.0px;
-    border: 1px solid rgb(10, 200, 180);
+    border: 1px solid rgb(255, 255, 0);
     padding: 24px;
     margin: 8px 0;
     animation: anim 1.2s ease-in-out infinite alternate;
@@ -43,7 +43,7 @@ label {
 
     font-size: 13px;
     font-weight: 300;
-    color: rgb(10, 200, 180);
+    color: rgb(255, 255, 0);
     margin-bottom: 18px;
 
 }
@@ -99,12 +99,12 @@ input:focus {
 }
 
 .button:hover {
-    border: 1px solid rgb(10, 200, 180);
+    border: 1px solid rgb(255, 255, 0);
 }
 
 .smool {
     font-size: 13px;
-    color : rgb(10, 200, 180);
+    color : rgb(255, 255, 0);
 }
 
 .bold {
@@ -135,5 +135,5 @@ input:focus {
 
 @keyframes anim {
     from {box-shadow: 0px 0px 60px 6px rgb(24, 24, 24)}
-    to {box-shadow: 0px 0px 60px 6px rgb(10, 200, 180)}
+    to {box-shadow: 0px 0px 60px 6px rgb(255, 255, 0)}
   }
