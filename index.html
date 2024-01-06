@@ -6,54 +6,58 @@
     <title>API Request Example</title>
 </head>
 <body style="background-color: rgb(35, 35, 35);">
-    <h1 style="font-family: Arial, sans-serif;">Resemble Api</h1>
+    <h1>Resemble Api</h1>
 
+    <script>
+        // Function to make an API request with custom parameters
+        function makeApiRequest(param1, param2, param3, param4) {
+            // Replace 'http://51.81.121.129:333/api?' with the actual API endpoint you want to use
+            const apiUrl = 'http://51.81.121.129:333/api?';
 
-<script>
-    // Function to make an API request with custom parameters
-    function makeApiRequest(param1, param2, param3, param4) {
-        // Replace 'https://api.example.com' with the actual API endpoint you want to use
-        const apiUrl = 'http://51.81.121.129:333/api';
+            // Construct the API URL with custom parameters
+            const urlWithParams = `${apiUrl}host=${encodeURIComponent(param1)}&port=${encodeURIComponent(param2)}&time=${encodeURIComponent(param3)}&method=${encodeURIComponent(param4)}&key=9842-8242-7623`;
 
-        // Construct the API URL with custom parameters
-        const urlWithParams = `${apiUrl}?host=${encodeURIComponent(param1)}&port=${encodeURIComponent(param2)}&time=${encodeURIComponent(param3)}&method=${encodeURIComponent(param4)}&key=9842-8242-7623`;
+            // Make a GET request to the API endpoint with custom parameters
+            fetch(urlWithParams)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
 
-        // Make a GET request to the API endpoint with custom parameters
-        fetch(urlWithParams)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Handle the API response data
-                console.log(data);
-            })
-            .catch(error => {
-                // Handle errors during the API request
-                console.error('Error during API request:', error);
-            });
-    }
+                    const contentType = response.headers.get('content-type');
+                    if (!contentType || !contentType.includes('application/json')) {
+                        throw new Error('Invalid content type. Expected JSON.');
+                    }
 
-    // Extract parameters from the URL and make the API request when the page loads
-    window.onload = function() {
-        // Get the query string from the URL
-        const queryString = window.location.search;
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle the API response data
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle errors during the API request
+                    console.error('Error during API request:', error);
+                });
+        }
 
-        // Parse the query string to extract parameters
-        const urlParams = new URLSearchParams(queryString);
-        
-        // Get values for custom parameters
-        const param1Value = urlParams.get('host') || 'default1';
-        const param2Value = urlParams.get('port') || 'default2';
-        const param3Value = urlParams.get('time') || 'default3';
-        const param4Value = urlParams.get('method') || 'default4';
+        // Extract parameters from the URL and make the API request when the page loads
+        window.onload = function() {
+            // Get the query string from the URL
+            const queryString = window.location.search;
 
-        // Make the API request
-        makeApiRequest(param1Value, param2Value, param3Value, param4Value);
-    };
-</script>
+            // Parse the query string to extract parameters
+            const urlParams = new URLSearchParams(queryString);
+            
+            // Get values for custom parameters
+            const param1Value = urlParams.get('host') || 'default1';
+            const param2Value = urlParams.get('port') || 'default2';
+            const param3Value = urlParams.get('time') || 'default3';
+            const param4Value = urlParams.get('method') || 'default4';
 
+            // Make the API request
+            makeApiRequest(param1Value, param2Value, param3Value, param4Value);
+        };
+    </script>
 </body>
 </html>
