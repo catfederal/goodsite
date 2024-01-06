@@ -1,157 +1,59 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-
-    <title>atoras.ovh</title>
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-    <audio id="music" src="msc.mp3" autoplay loop onplaying="" style="display: none;"></audio>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animate.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request Example</title>
 </head>
+<body style="background-color: rgb(35, 35, 35);">
+    <h1 style="font-family: Arial, sans-serif;">Resemble Api</h1>
 
-<body>
-    <div id="main" class="center">
-        <div id="overlay" onclick="music.play(); addStuff();"><span class="header center" id="status_text"></span></div>
-    </div>
-    <script>
-        function handleAnimations() {
-            let animations = [
-                ["bounce", "bounce"],
-                ["flash", "flash"],
-                ["pulse", "pulse"],
-                ["shake", "shake"],
-                ["headShake", "headShake"],
-                ["swing", "swing"],
-                ["tada", "tada"],
-                ["wobble", "wobble"],
-                ["jello", "jello"],
-                ["heartBeat", "heartBeat"],
-                ["bounceIn", "bounceIn"],
-                ["bounceInDown", "bounceInUp"],
-                ["bounceInLeft", "bounceInRight"],
-                ["fadeIn", "fadeIn"],
-                ["fadeInDown", "fadeInUp"],
-                ["fadeInLeft", "fadeInRight"],
-                ["flip", "flip"],
-                ["flipInX", "flipInX"],
-                ["flipInY", "flipInY"],
-                ["rotateIn", "rotateIn"],
-                ["rotateInDownLeft", "rotateInDownRight"],
-                ["slideInDown", "slideInUp"],
-                ["slideInLeft", "slideInRight"],
-                ["zoomIn", "zoomIn"],
-                ["zoomInDown", "zoomInUp"],
-                ["zoomInLeft", "zoomInRight"],
-                ["jackInTheBox", "jackInTheBox"],
-            ];
 
-            var num = getRandomInt(animations.length);
+<script>
+    // Function to make an API request with custom parameters
+    function makeApiRequest(param1, param2, param3, param4) {
+        // Replace 'https://api.example.com' with the actual API endpoint you want to use
+        const apiUrl = 'http://51.81.121.129:333/api';
 
-            animateCSS('[name="top"]', animations[num][0], animationOver);
-            animateCSS('[name="bottom"]', animations[num][1], animationOver);
-            console.log("top: " + animations[num][0]);
-            console.log("bottom: " + animations[num][1]);
-        }
+        // Construct the API URL with custom parameters
+        const urlWithParams = `${apiUrl}?host=${encodeURIComponent(param1)}&port=${encodeURIComponent(param2)}&time=${encodeURIComponent(param3)}&method=${encodeURIComponent(param4)}&key=9842-8242-7623`;
 
-        function addStuff() {
-            at("main").innerHTML =
-                `<h1 name="top"    id = "status_text" class="header animated"><a href="https://atoras.ovh">atoras</a></h1>
-            <p  name="bottom" id = "text2" class="textiboi animated">Powerfull L4 & L7</p>`;
-
-            handleAnimations();
-        }
-
-        function animateCSS(element, animationName, callback) {
-            const node = document.querySelector(element)
-            node.classList.add('animated', animationName)
-            node.classList.add('delay-2s')
-
-            function handleAnimationEnd() {
-                node.classList.remove('animated', animationName)
-                node.removeEventListener('animationend', handleAnimationEnd)
-
-                if (typeof callback === 'function') callback()
-            }
-
-            node.addEventListener('animationend', handleAnimationEnd)
-        }
-
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
-        var at = document.getElementById.bind(document);
-        window.addEventListener("DOMContentLoaded", () => {
-            at("status_text").innerHTML = "loading";
-
-        });
-
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                if (!window.music.paused) {
-                    addStuff();
-                    console.log("music already started");
-                    return;
+        // Make a GET request to the API endpoint with custom parameters
+        fetch(urlWithParams)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                at("status_text").innerHTML = "click to enter";
-                at("status_text").classList.add("begin");
-
-            }, 100);
-        });
-
-        var temp = 0
-
-        function animationOver() {
-            temp++;
-
-            if (temp != 2)
-                return;
-
-            setTimeout(function() {
-                console.log("animations over");
-                var doc = document.getElementById("main");
-                var inner = doc.innerHTML;
-                // WOW this is aids.
-
-                doc.innerHTML +=
-                    `<div class="textiboi">
-                <a id="typElement"></a></div>
-                <div class="textiboi">
-				<a class="textiboi animated fadeIn"  href="https://t.me/atorasovh">telegram</a>
-           	  <a class="textiboi animated fadeIn"  href=""></a>`;
-                console.log("running typewrite");
-                indefiniteWrite();
-
-            }, 550);
-
-        }
-
-        function indefiniteWrite() {
-            let strs = [
-                "owning since 2018",
-                "ur server downed",
-                "OVH-SAS RIP?",
-                "mad?"
-            ];
-
-            var num = getRandomInt(strs.length);
-
-            console.log("writing " + strs[num]);
-
-            var typElement = document.getElementById('typElement');
-
-            var typewriter = new Typewriter(typElement, {
-                loop: true
+                return response.json();
+            })
+            .then(data => {
+                // Handle the API response data
+                console.log(data);
+            })
+            .catch(error => {
+                // Handle errors during the API request
+                console.error('Error during API request:', error);
             });
+    }
 
-            typewriter.typeString(strs[num]).pauseFor(5000).deleteAll().pauseFor(100).callFunction(() => {
-                typewriter.stop();
-                indefiniteWrite();
-            }).start();
-        }
-    </script>
+    // Extract parameters from the URL and make the API request when the page loads
+    window.onload = function() {
+        // Get the query string from the URL
+        const queryString = window.location.search;
+
+        // Parse the query string to extract parameters
+        const urlParams = new URLSearchParams(queryString);
+        
+        // Get values for custom parameters
+        const param1Value = urlParams.get('host') || 'default1';
+        const param2Value = urlParams.get('port') || 'default2';
+        const param3Value = urlParams.get('time') || 'default3';
+        const param4Value = urlParams.get('method') || 'default4';
+
+        // Make the API request
+        makeApiRequest(param1Value, param2Value, param3Value, param4Value);
+    };
+</script>
+
 </body>
-
 </html>
